@@ -1,8 +1,10 @@
 package com.tuempresa.facturacion.modelo;
 
+import java.math.*;
+
 import javax.persistence.*;
 
-import org.apache.logging.log4j.core.config.plugins.validation.constraints.*;
+import org.openxava.annotations.*;
 
 import lombok.*;
 
@@ -10,13 +12,31 @@ import lombok.*;
 @Getter
 @Setter
 public class Producto {
-	
-	@Id
-	@Column(length=9)
-	int numero;
-	
-	@Column(length=50)
-	@Required
-	String descripcion;
-	
+
+    @Id
+    @Column(length=9)
+    int numero;
+
+    @Column(length=50)
+    @Required
+    String descripcion;
+
+    @ManyToOne(fetch = FetchType.EAGER, optional = true) 
+    @DescriptionsList
+    Categoria categoria;
+    
+    @Money
+    BigDecimal precio;
+    
+    @Files
+    @Column(length=32)
+    String fotos;
+    
+    @TextArea
+    String observaciones;
+    
+    
+    
+    
+    
 }
